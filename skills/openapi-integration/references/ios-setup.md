@@ -300,6 +300,23 @@ public struct ItemService: ItemServiceProtocol {
         }
     }
 
+    public func fetchItem(id: Int) async throws -> StorageItemDetail {
+        let response = try await StorageAPIClient.shared.client.getItem(
+            .init(path: .init(id: String(id)))
+        )
+        switch response {
+        case .ok(let okResponse):
+            switch okResponse.body {
+            // Detail response returns item directly without `data` wrapper
+            case .json(let item): return StorageItemDetail(from: item)
+            }
+        case .unauthorized: throw APIError.unauthorized
+        case .notFound: throw APIError.notFound
+        case .undocumented(let statusCode, _):
+            throw APIError.serverError("Unexpected status: \(statusCode)")
+        }
+    }
+
     public func deleteItem(id: Int) async throws {
         let response = try await StorageAPIClient.shared.client.deleteItem(
             .init(path: .init(id: String(id)))
@@ -312,7 +329,5 @@ public struct ItemService: ItemServiceProtocol {
             throw APIError.serverError("Unexpected status: \(statusCode)")
         }
     }
-
-    // fetchItem and updateItem follow the same switch pattern
 }
 ```

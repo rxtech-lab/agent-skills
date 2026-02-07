@@ -170,6 +170,8 @@ export async function POST(request: NextRequest) {
 
 ### Single-resource endpoint (`app/api/v1/items/[id]/route.ts`)
 
+Detail responses return the schema directly without wrapping in a `data` attribute.
+
 ```typescript
 /**
  * Get item by ID
