@@ -1,2 +1,3 @@
-# agent-skills
-Skills used in RxLab's project
+# RxLab's skills
+
+This repository contains list of skills used in rxlab
