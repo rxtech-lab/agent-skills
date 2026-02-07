@@ -1,0 +1,27 @@
+{
+  "name": "anthropic-agent-skills",
+  "owner": {
+    "name": "RxLab",
+    "email": "support@rxlab.com"
+  },
+  "metadata": {
+    "description": "Rxlab's collection of skills",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "code-generation",
+      "description": "Collection of document processing suite including Excel, Word, PowerPoint, and PDF capabilities",
+      "source": "./",
+      "strict": false,
+      "skills": ["./skills/openapi-integration"]
+    },
+    {
+      "name": "oauth-integration",
+      "description": "Skills for integrating RxLab's OAuth system for authentication and authorization",
+      "source": "./",
+      "strict": false,
+      "skills": []
+    }
+  ]
+}
