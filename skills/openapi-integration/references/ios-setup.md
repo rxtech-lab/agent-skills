@@ -272,7 +272,7 @@ public struct ItemService: ItemServiceProtocol {
         case .ok(let okResponse):
             switch okResponse.body {
             case .json(let paginatedResponse):
-                return paginatedResponse.data.map { StorageItem(from: $0) }
+                return paginatedResponse.items.map { StorageItem(from: $0) }
             }
         case .unauthorized:
             throw APIError.unauthorized

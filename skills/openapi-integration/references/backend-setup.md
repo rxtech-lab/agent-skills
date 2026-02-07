@@ -111,9 +111,9 @@ export const ItemsQueryParams = PaginationQueryParams.extend({
   visibility: z.enum(["publicAccess", "privateAccess"]).optional().describe("Filter by visibility"),
 });
 
-// Paginated response
+// Paginated response - return items directly without wrapping in `data`
 export const PaginatedItemsResponse = z.object({
-  data: z.array(ItemResponseSchema).describe("Array of items"),
+  items: z.array(ItemResponseSchema).describe("Array of items"),
   pagination: PaginationInfo,
 });
 ```
