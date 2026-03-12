@@ -30,7 +30,7 @@ The public key is generated alongside the private key using `bin/generate_keys` 
 
 ## Swift App Entry Point
 
-Import Sparkle conditionally for macOS and initialize the updater controller:
+Import Sparkle conditionally for macOS and initialize the updater controller. The app entry point is shared between iOS and macOS using `#if os(macOS)` guards:
 
 ```swift
 #if os(macOS)
@@ -42,7 +42,7 @@ Import Sparkle conditionally for macOS and initialize the updater controller:
 #endif
 
 @main
-struct iosApp: App {
+struct iosApp: App { // Shared entry point — Sparkle code is macOS-only via #if guards
     init() {
         #if os(macOS)
             updaterController = SPUStandardUpdaterController(
