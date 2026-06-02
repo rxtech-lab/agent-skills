@@ -11,7 +11,7 @@
   "plugins": [
     {
       "name": "code-generation",
-      "description": "Collection of document processing suite including Excel, Word, PowerPoint, and PDF capabilities",
+      "description": "Set up and maintain OpenAPI 3.0 integration between a Next.js backend and a Swift iOS client",
       "source": "./",
       "strict": false,
       "skills": ["./skills/openapi-integration"]
@@ -21,7 +21,35 @@
       "description": "Skills for integrating RxLab's OAuth system for authentication and authorization",
       "source": "./",
       "strict": false,
-      "skills": []
+      "skills": ["./skills/oauth-authentication"]
+    },
+    {
+      "name": "ios-release",
+      "description": "Manage the two-stage iOS release pipeline using GitHub Actions and Xcode Cloud for App Store distribution",
+      "source": "./",
+      "strict": false,
+      "skills": ["./skills/ios-auto-release"]
+    },
+    {
+      "name": "macos-release",
+      "description": "Set up and manage macOS app releases with Sparkle auto-update via GitHub Actions",
+      "source": "./",
+      "strict": false,
+      "skills": ["./skills/sparkle-github-release"]
+    },
+    {
+      "name": "macos-extensionkit",
+      "description": "Build a macOS app that hosts its own in-app UI extension using Apple's ExtensionKit / ExtensionFoundation",
+      "source": "./",
+      "strict": false,
+      "skills": ["./skills/macos-extensionkit"]
+    },
+    {
+      "name": "argo-trading",
+      "description": "Iterate on algorithmic trading strategies in ArgoTradingSwift via the embedded MCP server",
+      "source": "./",
+      "strict": false,
+      "skills": ["./skills/argo-trading"]
     }
   ]
 }
