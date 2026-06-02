@@ -1,0 +1,80 @@
+# .github/workflows/android-release.yml
+#
+# React Native (Expo/EAS) Android release pipeline.
+#   - push:    build the AAB locally on the runner (smoke test), do NOT submit
+#   - release: build + bump version from tag + submit to Google Play internal track
+#
+# Required GitHub secrets:
+#   EXPO_TOKEN                  Expo access token (build/submit auth + EAS-managed keystore)
+#   GOOGLE_SERVICE_ACCOUNT_B64  base64 of the Google Play service-account JSON
+#
+# Assumes the Expo app lives in `mobile/` (adjust `working-directory` if it is the repo root).
+
+name: Android Release
+
+on:
+  release:
+    types: [created, published]
+  push:
+
+jobs:
+  android:
+    # Android local builds are heavy (gradle bundleRelease runs inside EAS).
+    # Use a larger runner if ubuntu-latest is too slow / runs out of memory.
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: mobile
+
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - uses: oven-sh/setup-bun@v2
+
+      - name: Install eas-cli
+        run: npm install -g eas-cli
+
+      - name: Install dependencies
+        run: bun install
+
+      # versionName comes from the release tag; EAS owns the monotonic versionCode
+      # (eas.json: appVersionSource=remote, autoIncrement=true). On plain push the
+      # tag is absent, so the existing app.json version is used for the smoke build.
+      - name: Set version from release tag
+        if: github.event_name == 'release'
+        run: |
+          VERSION="${GITHUB_REF_NAME#v}"   # v1.2.3 -> 1.2.3
+          cat <<< "$(jq --arg v "$VERSION" '.expo.version = $v' app.json)" > app.json
+          echo "app.json version set to $VERSION"
+
+      # --local builds on the runner (no EAS cloud minutes). The android project,
+      # Metro bundling, and gradle bundleRelease all happen inside EAS Build.
+      - name: Build Android AAB
+        run: eas build --platform android --profile production --local --non-interactive --output ./build-android.aab
+        env:
+          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+
+      # Decode the service account to a file at runtime — never commit this JSON.
+      # eas.json's submit profile references it via serviceAccountKeyPath.
+      - name: Decode Google Play service account
+        if: github.event_name == 'release'
+        run: echo "$GOOGLE_SERVICE_ACCOUNT_B64" | base64 -d > ./google-service-account.json
+        env:
+          GOOGLE_SERVICE_ACCOUNT_B64: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_B64 }}
+
+      # Submit only on a published/created release. Every push above still builds
+      # the AAB as a smoke test, mirroring the macos-release push-vs-release gate.
+      - name: Submit to Google Play internal track
+        if: github.event_name == 'release'
+        run: eas submit --platform android --profile internal --path ./build-android.aab --non-interactive
+        env:
+          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
