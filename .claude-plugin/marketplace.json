@@ -38,6 +38,13 @@
       "skills": ["./skills/sparkle-github-release"]
     },
     {
+      "name": "android-release",
+      "description": "Set up and manage React Native (Expo/EAS) Android releases via GitHub Actions: local EAS build, version bump from tag, and Google Play internal-track submit",
+      "source": "./",
+      "strict": false,
+      "skills": ["./skills/react-native-android-release"]
+    },
+    {
       "name": "macos-extensionkit",
       "description": "Build a macOS app that hosts its own in-app UI extension using Apple's ExtensionKit / ExtensionFoundation",
       "source": "./",
