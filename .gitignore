@@ -2,3 +2,4 @@
 skills/ios-auto-release/references/xcode-cloud.md
 *.pyc
 *.skill
+.DS_Store

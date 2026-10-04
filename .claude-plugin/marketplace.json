@@ -60,10 +60,10 @@
     },
     {
       "name": "chippy-mcp",
-      "description": "Save, search and list summaries in the user's Chippy library through the MCP server built into the Chippy Mac app",
+      "description": "Save, search and list summaries in the user's Chippy library through Chippy's hosted MCP server, using a personal API key; design varied summary and briefing card covers",
       "source": "./",
       "strict": false,
-      "skills": ["./skills/chippy-mcp"]
+      "skills": ["./skills/chippy-mcp", "./skills/chippy-card-design"]
     }
   ]
 }
