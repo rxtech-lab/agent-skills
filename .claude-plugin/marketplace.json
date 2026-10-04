@@ -57,6 +57,13 @@
       "source": "./",
       "strict": false,
       "skills": ["./skills/argo-trading"]
+    },
+    {
+      "name": "chippy-mcp",
+      "description": "Save, search and list summaries in the user's Chippy library through the MCP server built into the Chippy Mac app",
+      "source": "./",
+      "strict": false,
+      "skills": ["./skills/chippy-mcp"]
     }
   ]
 }
