@@ -60,10 +60,10 @@
     },
     {
       "name": "chippy-mcp",
-      "description": "Save, search and list summaries in the user's Chippy library through Chippy's hosted MCP server, using a personal API key; design varied summary and briefing card covers",
+      "description": "Save, search and list summaries in the user's Chippy library through Chippy's hosted MCP server, using a personal API key; design varied summary and briefing card covers; author animated podcast videos with Magic Move title and ending",
       "source": "./",
       "strict": false,
-      "skills": ["./skills/chippy-mcp", "./skills/chippy-card-design"]
+      "skills": ["./skills/chippy-mcp", "./skills/chippy-card-design", "./skills/chippy-podcast-video"]
     }
   ]
 }

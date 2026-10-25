@@ -56,6 +56,10 @@ Nothing is re-summarised on the server. **You write** the title, summary and key
 
 For requests to design or improve a summary/briefing card's cover, use [Chippy Card Design](../chippy-card-design/SKILL.md). It provides varied compositions and guidance for crops and title placement. The current `add_summary` schema has no cover-layout or image-prompt field; the server chooses the cover. Do not insert design directions into summary content or raw source text, and do not claim that loading the design skill changes MCP-generated covers.
 
+## Podcast videos
+
+To author or redesign the animated video of a Chippy podcast episode (`get_podcast_project`, `render_podcast_frame`, `submit_podcast_video`…), use [Chippy Podcast Video](../chippy-podcast-video/SKILL.md). It builds on this skill's connection setup.
+
 ## Finding chips
 
 - **By topic or question** → `search_summaries` with a natural-language `query` (≤ 200 chars) such as "battery recycling startups". It matches by meaning, so describe the idea; you don't need the exact title words. Add `source` when the user names a platform ("the YouTube video about…" → `source: "youtube"`).
