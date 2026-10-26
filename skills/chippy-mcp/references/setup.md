@@ -60,7 +60,7 @@ Restart Claude Desktop afterwards.
 | `401` `MISSING_API_KEY` | The `Authorization: Bearer …` header isn't sent. Check the agent's configuration |
 | `401` `INVALID_API_KEY` ("invalid or has been revoked") | The key was revoked, mistyped, or belongs to a deleted account. Create a new key in Settings → MCP Server |
 | `405` on `GET` | Expected: the server is stateless and has no server-to-client stream. Clients fall back to plain `POST` |
-| A tool says the allowance is used up | The user's free summaries for today are used and they have no points. They top up in Settings → Summaries & Points |
+| A tool says the allowance or points are used up | Only the paid tools (such as `create_podcast` and `add_to_trip_from_source`) charge points; `add_summary` and `update_summary` are free. The user tops up in Settings → Summaries & Points |
 | `add_summary` is slow | Normal. The duplicate check and cover design take up to ~3 minutes |
 
 Manual check (expect `401` without the header, and a JSON-RPC `result` with it):
